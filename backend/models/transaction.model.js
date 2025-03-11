@@ -29,7 +29,7 @@ const transactionSchema = new mongoose.Schema({
     default: "Unknown",
   },
   date: {
-    type: date,
+    type: Date,
     required: true,
   },
 });

@@ -63,15 +63,20 @@ await server.start();
 
 // Set up our Express middleware to handle CORS, body parsing,
 // and our expressMiddleware function.
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://studio.apollographql.com"], // Allow frontend and Apollo Studio
+    credentials: true, // Allow cookies & authentication headers
+    methods: ["GET", "POST", "OPTIONS"], // Allow required methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+  })
+);
+
+app.use(express.json());
+
 app.use(
   "/graphql",
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  }),
-  express.json(),
-  // expressMiddleware accepts the same arguments:
-  // an Apollo Server instance and optional configuration options
   expressMiddleware(server, {
     context: async ({ req, res }) => buildContext({ req, res }),
   })
