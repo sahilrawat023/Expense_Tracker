@@ -70,7 +70,7 @@ await server.start();
 app.use(
   "/graphql",
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "*",
     credentials: true,
   }),
   express.json(),
@@ -81,15 +81,8 @@ app.use(
   })
 );
 
-// npm run build will build your frontend app, and it will the optimized version of your app
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-});
-
-// Modified server startup
-await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+const PORT = process.env.PORT || 4000;
+await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 await connectDB();
 
-console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
