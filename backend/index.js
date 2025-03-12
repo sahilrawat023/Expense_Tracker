@@ -89,12 +89,6 @@ const frontendPath =
     ? path.join(process.cwd(), "../frontend/dist")
     : path.join(__dirname, "frontend/dist");
 
-app.use(express.static(frontendPath));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-
 // Modified server startup
 const PORT = process.env.PORT || 4000;
 await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
