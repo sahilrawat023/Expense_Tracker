@@ -14,7 +14,6 @@ const categoryColorMap = {
   saving: "from-green-700 to-green-400",
   expense: "from-pink-800 to-pink-600",
   investment: "from-blue-700 to-blue-400",
-  // Add more categories and corresponding color classes as needed
 };
 
 const Card = ({ transaction, authUser }) => {
@@ -25,7 +24,6 @@ const Card = ({ transaction, authUser }) => {
     refetchQueries: ["GetTransactions", "GetTransactionStatistics"],
   });
 
-  // Capitalize the first letter of the description
   description = description[0]?.toUpperCase() + description.slice(1);
   category = category[0]?.toUpperCase() + category.slice(1);
   paymentType = paymentType[0]?.toUpperCase() + paymentType.slice(1);

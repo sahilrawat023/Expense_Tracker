@@ -58,11 +58,7 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
-// Ensure we wait for our server to start
 await server.start();
-
-// Set up our Express middleware to handle CORS, body parsing,
-// and our expressMiddleware function.
 
 app.use(
   cors({
@@ -82,7 +78,6 @@ app.use(
   })
 );
 
-// npm run build will build your frontend app, and it will the optimized version of your app
 app.use(express.static(path.join(__dirname, "frontend/dist")));
 
 app.get("*", (req, res) => {
