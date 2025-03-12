@@ -11,22 +11,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    profilePicture: {
+    password: {
       type: String,
       required: true,
+    },
+    profilePicture: {
+      type: String,
+      default: "",
     },
     gender: {
       type: String,
       enum: ["male", "female"],
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
     },
   },
   { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
+
 export default User;

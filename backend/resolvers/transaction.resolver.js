@@ -58,15 +58,23 @@ const transactionResolver = {
   Mutation: {
     createTransaction: async (_, { input }, context) => {
       try {
+        if (!context.getUser()) throw new Error("Unauthorized");
+
+        // Add validation for required fields
+        if (!input.description || !input.amount || !input.category) {
+          throw new Error("Missing required fields");
+        }
+
         const newTransaction = new Transaction({
           ...input,
           userId: context.getUser()._id,
         });
+
         await newTransaction.save();
         return newTransaction;
       } catch (err) {
-        console.error("Error creating transaction:", err);
-        throw new Error("Error creating transaction");
+        console.error("Error creating transaction:", err.message, err.stack);
+        throw new Error(`Error creating transaction: ${err.message}`);
       }
     },
     updateTransaction: async (_, { input }) => {

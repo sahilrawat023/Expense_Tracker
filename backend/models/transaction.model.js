@@ -6,16 +6,16 @@ const transactionSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  descreption: {
+  description: {
     type: String,
     required: true,
   },
-  paymenttype: {
+  paymentType: {
     type: String,
     enum: ["cash", "card"],
     required: true,
   },
-  cateogry: {
+  category: {
     type: String,
     enum: ["saving", "expense", "investment"],
     required: true,
@@ -33,5 +33,7 @@ const transactionSchema = new mongoose.Schema({
     required: true,
   },
 });
+
 const Transaction = mongoose.model("Transaction", transactionSchema);
+
 export default Transaction;
