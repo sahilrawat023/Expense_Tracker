@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "echo 'No build step for backend'"
+    "build": "echo 'Skipping build step since backend has no build process'"
   },
   "type": "module",
   "keywords": [],
