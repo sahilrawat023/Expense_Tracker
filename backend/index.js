@@ -62,7 +62,12 @@ await server.start();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://studio.apollographql.com"], // Allow frontend and Apollo Studio
+    origin: [
+      "http://localhost:3000",
+      "https://studio.apollographql.com",
+      "https://expense-tracker-nfi1.onrender.com/",
+    ],
+    // Allow frontend and Apollo Studio
     credentials: true, // Allow cookies & authentication headers
     methods: ["GET", "POST", "OPTIONS"], // Allow required methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
@@ -78,14 +83,21 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "frontend/dist")));
+// Replace your existing static file serving code with this
+const frontendPath =
+  process.env.NODE_ENV === "production"
+    ? path.join(process.cwd(), "../frontend/dist")
+    : path.join(__dirname, "frontend/dist");
+
+app.use(express.static(frontendPath));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist", "index.html"));
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // Modified server startup
-await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+const PORT = process.env.PORT || 4000;
+await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 await connectDB();
 
-console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
