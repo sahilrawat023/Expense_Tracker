@@ -32,11 +32,11 @@ const transactionResolver = {
       const categoryMap = {};
 
       // const transactions = [
-      // 	{ category: "expense", amount: 50 },
-      // 	{ category: "expense", amount: 75 },
-      // 	{ category: "investment", amount: 100 },
-      // 	{ category: "saving", amount: 30 },
-      // 	{ category: "saving", amount: 20 }
+      //   { category: "expense", amount: 50 },
+      //   { category: "expense", amount: 75 },
+      //   { category: "investment", amount: 100 },
+      //   { category: "saving", amount: 30 },
+      //   { category: "saving", amount: 20 },
       // ];
 
       transactions.forEach((transaction) => {
