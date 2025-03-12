@@ -65,9 +65,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://studio.apollographql.com",
-      "https://expense-tracker-nfi1.onrender.com/",
+      "https://expense-tracker-nfi1.onrender.com",
     ],
-    // Allow frontend and Apollo Studio
     credentials: true, // Allow cookies & authentication headers
     methods: ["GET", "POST", "OPTIONS"], // Allow required methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
@@ -82,12 +81,6 @@ app.use(
     context: async ({ req, res }) => buildContext({ req, res }),
   })
 );
-
-// Replace your existing static file serving code with this
-const frontendPath =
-  process.env.NODE_ENV === "production"
-    ? path.join(process.cwd(), "../frontend/dist")
-    : path.join(__dirname, "frontend/dist");
 
 // Modified server startup
 const PORT = process.env.PORT || 4000;
